@@ -1,0 +1,18 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "C:/Users/Careka/Desktop/bh.wsdl"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "messageContract": true,
+    "namespaceMappings": [
+      "*, ws_bh"
+    ],
+    "sync": true,
+    "targetFramework": "netcoreapp3.1",
+    "typeReuseMode": "None"
+  }
+}

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="LoteRpsService" targetNamespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types />
+  <message name="consultarSequencialRps">
+    <part name="mensagemXml" type="xsd:string" />
+  </message>
+  <message name="consultarSequencialRpsResponse">
+    <part name="consultarSequencialRpsReturn" type="xsd:string" />
+  </message>
+  <message name="enviarSincrono">
+    <part name="mensagemXml" type="xsd:string" />
+  </message>
+  <message name="enviarSincronoResponse">
+    <part name="enviarSincronoReturn" type="xsd:string" />
+  </message>
+  <message name="testeEnviar">
+    <part name="mensagemXml" type="xsd:string" />
+  </message>
+  <message name="testeEnviarResponse">
+    <part name="testeEnviarReturn" type="xsd:string" />
+  </message>
+  <message name="enviar">
+    <part name="mensagemXml" type="xsd:string" />
+  </message>
+  <message name="enviarResponse">
+    <part name="enviarReturn" type="xsd:string" />
+  </message>
+  <message name="consultarLote">
+    <part name="mensagemXml" type="xsd:string" />
+  </message>
+  <message name="consultarLoteResponse">
+    <part name="consultarLoteReturn" type="xsd:string" />
+  </message>
+  <message name="consultarNota">
+    <part name="mensagemXml" type="xsd:string" />
+  </message>
+  <message name="consultarNotaResponse">
+    <part name="consultarNotaReturn" type="xsd:string" />
+  </message>
+  <message name="cancelar">
+    <part name="mensagemXml" type="xsd:string" />
+  </message>
+  <message name="cancelarResponse">
+    <part name="cancelarReturn" type="xsd:string" />
+  </message>
+  <message name="consultarNFSeRps">
+    <part name="mensagemXml" type="xsd:string" />
+  </message>
+  <message name="consultarNFSeRpsResponse">
+    <part name="consultarNFSeRpsReturn" type="xsd:string" />
+  </message>
+  <portType name="LoteRps">
+    <operation name="consultarSequencialRps">
+      <input message="tns:consultarSequencialRps" />
+      <output message="tns:consultarSequencialRpsResponse" />
+    </operation>
+    <operation name="enviarSincrono">
+      <input message="tns:enviarSincrono" />
+      <output message="tns:enviarSincronoResponse" />
+    </operation>
+    <operation name="testeEnviar">
+      <input message="tns:testeEnviar" />
+      <output message="tns:testeEnviarResponse" />
+    </operation>
+    <operation name="enviar">
+      <input message="tns:enviar" />
+      <output message="tns:enviarResponse" />
+    </operation>
+    <operation name="consultarLote">
+      <input message="tns:consultarLote" />
+      <output message="tns:consultarLoteResponse" />
+    </operation>
+    <operation name="consultarNota">
+      <input message="tns:consultarNota" />
+      <output message="tns:consultarNotaResponse" />
+    </operation>
+    <operation name="cancelar">
+      <input message="tns:cancelar" />
+      <output message="tns:cancelarResponse" />
+    </operation>
+    <operation name="consultarNFSeRps">
+      <input message="tns:consultarNFSeRps" />
+      <output message="tns:consultarNFSeRpsResponse" />
+    </operation>
+  </portType>
+  <binding name="LoteRpsBinding" type="tns:LoteRps">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="consultarSequencialRps">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </output>
+    </operation>
+    <operation name="enviarSincrono">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </output>
+    </operation>
+    <operation name="testeEnviar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </output>
+    </operation>
+    <operation name="enviar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </output>
+    </operation>
+    <operation name="consultarLote">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </output>
+    </operation>
+    <operation name="consultarNota">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </output>
+    </operation>
+    <operation name="cancelar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </output>
+    </operation>
+    <operation name="consultarNFSeRps">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws" />
+      </output>
+    </operation>
+  </binding>
+  <service name="LoteRpsService">
+    <port name="LoteRps" binding="tns:LoteRpsBinding">
+      <soap:address location="http://sistemas.semfaz.saoluis.ma.gov.br:80/WsNFe2/LoteRps" />
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ws="http://ws.bhiss.pbh.gov.br" name="nfse" targetNamespace="http://ws.bhiss.pbh.gov.br" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://ws.bhiss.pbh.gov.br">
+      <xsd:complexType name="input">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="nfseCabecMsg" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="nfseDadosMsg" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="output">
+        <xsd:sequence>
+          <xsd:element name="outputXML" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="CancelarNfseRequest" type="ws:input" />
+      <xsd:element name="CancelarNfseResponse" type="ws:output" />
+      <xsd:element name="ConsultarLoteRpsRequest" type="ws:input" />
+      <xsd:element name="ConsultarLoteRpsResponse" type="ws:output" />
+      <xsd:element name="ConsultarNfseRequest" type="ws:input" />
+      <xsd:element name="ConsultarNfseResponse" type="ws:output" />
+      <xsd:element name="ConsultarNfsePorFaixaRequest" type="ws:input" />
+      <xsd:element name="ConsultarNfsePorFaixaResponse" type="ws:output" />
+      <xsd:element name="ConsultarNfsePorRpsRequest" type="ws:input" />
+      <xsd:element name="ConsultarNfsePorRpsResponse" type="ws:output" />
+      <xsd:element name="ConsultarSituacaoLoteRpsRequest" type="ws:input" />
+      <xsd:element name="ConsultarSituacaoLoteRpsResponse" type="ws:output" />
+      <xsd:element name="RecepcionarLoteRpsRequest" type="ws:input" />
+      <xsd:element name="RecepcionarLoteRpsResponse" type="ws:output" />
+      <xsd:element name="GerarNfseRequest" type="ws:input" />
+      <xsd:element name="GerarNfseResponse" type="ws:output" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CancelarNfseRequest">
+    <wsdl:part name="parameters" element="ws:CancelarNfseRequest" />
+  </wsdl:message>
+  <wsdl:message name="CancelarNfseResponse">
+    <wsdl:part name="parameters" element="ws:CancelarNfseResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarLoteRpsRequest">
+    <wsdl:part name="parameters" element="ws:ConsultarLoteRpsRequest" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarLoteRpsResponse">
+    <wsdl:part name="parameters" element="ws:ConsultarLoteRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfseRequest">
+    <wsdl:part name="parameters" element="ws:ConsultarNfseRequest" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfseResponse">
+    <wsdl:part name="parameters" element="ws:ConsultarNfseResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfsePorFaixaRequest">
+    <wsdl:part name="parameters" element="ws:ConsultarNfsePorFaixaRequest" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfsePorFaixaResponse">
+    <wsdl:part name="parameters" element="ws:ConsultarNfsePorFaixaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfsePorRpsRequest">
+    <wsdl:part name="parameters" element="ws:ConsultarNfsePorRpsRequest" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfsePorRpsResponse">
+    <wsdl:part name="parameters" element="ws:ConsultarNfsePorRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarSituacaoLoteRpsRequest">
+    <wsdl:part name="parameters" element="ws:ConsultarSituacaoLoteRpsRequest" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarSituacaoLoteRpsResponse">
+    <wsdl:part name="parameters" element="ws:ConsultarSituacaoLoteRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="RecepcionarLoteRpsRequest">
+    <wsdl:part name="parameters" element="ws:RecepcionarLoteRpsRequest" />
+  </wsdl:message>
+  <wsdl:message name="RecepcionarLoteRpsResponse">
+    <wsdl:part name="parameters" element="ws:RecepcionarLoteRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GerarNfseRequest">
+    <wsdl:part name="parameters" element="ws:GerarNfseRequest" />
+  </wsdl:message>
+  <wsdl:message name="GerarNfseResponse">
+    <wsdl:part name="parameters" element="ws:GerarNfseResponse" />
+  </wsdl:message>
+  <wsdl:portType name="nfse">
+    <wsdl:operation name="CancelarNfse">
+      <wsdl:input message="ws:CancelarNfseRequest" />
+      <wsdl:output message="ws:CancelarNfseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarLoteRps">
+      <wsdl:input message="ws:ConsultarLoteRpsRequest" />
+      <wsdl:output message="ws:ConsultarLoteRpsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarNfse">
+      <wsdl:input message="ws:ConsultarNfseRequest" />
+      <wsdl:output message="ws:ConsultarNfseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarNfsePorFaixa">
+      <wsdl:input message="ws:ConsultarNfsePorFaixaRequest" />
+      <wsdl:output message="ws:ConsultarNfsePorFaixaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarNfsePorRps">
+      <wsdl:input message="ws:ConsultarNfsePorRpsRequest" />
+      <wsdl:output message="ws:ConsultarNfsePorRpsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarSituacaoLoteRps">
+      <wsdl:input message="ws:ConsultarSituacaoLoteRpsRequest" />
+      <wsdl:output message="ws:ConsultarSituacaoLoteRpsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RecepcionarLoteRps">
+      <wsdl:input message="ws:RecepcionarLoteRpsRequest" />
+      <wsdl:output message="ws:RecepcionarLoteRpsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GerarNfse">
+      <wsdl:input message="ws:GerarNfseRequest" />
+      <wsdl:output message="ws:GerarNfseResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="nfseSOAP" type="ws:nfse">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CancelarNfse">
+      <soap:operation soapAction="http://ws.bhiss.pbh.gov.br/CancelarNfse" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarLoteRps">
+      <soap:operation soapAction="http://ws.bhiss.pbh.gov.br/ConsultarLoteRps" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarNfse">
+      <soap:operation soapAction="http://ws.bhiss.pbh.gov.br/ConsultarNfse" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarNfsePorFaixa">
+      <soap:operation soapAction="http://ws.bhiss.pbh.gov.br/ConsultarNfsePorFaixa" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarNfsePorRps">
+      <soap:operation soapAction="http://ws.bhiss.pbh.gov.br/ConsultarNfsePorRps" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarSituacaoLoteRps">
+      <soap:operation soapAction="http://ws.bhiss.pbh.gov.br/ConsultarSituacaoLoteRps" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecepcionarLoteRps">
+      <soap:operation soapAction="http://ws.bhiss.pbh.gov.br/RecepcionarLoteRps" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GerarNfse">
+      <soap:operation soapAction="http://ws.bhiss.pbh.gov.br/GerarNfse" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NfseWSService">
+    <wsdl:port name="nfseSOAP" binding="ws:nfseSOAP">
+      <soap:address location="https://bhissdigital.pbh.gov.br:443/bhiss-ws/nfse" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
