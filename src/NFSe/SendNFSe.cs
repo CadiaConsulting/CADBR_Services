@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.WebJobs.Host.Bindings;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
@@ -8,12 +9,11 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using System.ServiceModel.Channels;
-using Microsoft.Azure.WebJobs.Host.Bindings;
 
 public class SendNFSe
 {
@@ -31,16 +31,26 @@ public class SendNFSe
 
         string msgResultado = "";
         Boolean error = false;
-        string[] Cities = { "RIO DE JANEIRO", "SAO PAULO", "FORTALEZA", "BARUERI", "MACAIBA", "BELO HORIZONTE", "OSASCO" };
+        string[] Cities = { "RIO DE JANEIRO", "SAO PAULO", "FORTALEZA", "BARUERI", "MACAIBA", "BELO HORIZONTE", "OSASCO", "SAOCAETANO" };
         string[] Actions = { "CONSULTA", "RECEPCIONARLOTERPS" };
+
+        //SoapEnvelopeLogger? soapLog = null;
+        //Boolean debug = req.Headers["Debug"].ToString().ToUpper() == "TRUE";
 
         try
         {
 
-            var bodyStream = new StreamReader(req.Body);
-            bodyStream.BaseStream.Seek(0, SeekOrigin.Begin);
-            string XMLString = bodyStream.ReadToEnd();         
-                
+            string XMLString = "";
+            using (var bodyStream = new StreamReader(
+                req.Body,
+                Encoding.UTF8,
+                detectEncodingFromByteOrderMarks: false,
+                bufferSize: 1024,
+                leaveOpen: true))
+            {
+                XMLString = await bodyStream.ReadToEndAsync();
+            }
+
             string City = req.Headers["City"].ToString().ToUpper();
             string Amb = req.Headers["Amb"].ToString().ToUpper();
             string Action = req.Headers["Action"].ToString().ToUpper();
@@ -511,7 +521,55 @@ public class SendNFSe
                         msgResultado = ser.Serialize<ws_campinas.consultarLoteResponse>(ws_response);
                     }
                 }
+                else
+                if (City == "SAOCAETANO")
+                {
 
+                    if (Amb == "HOM")
+                        URL = @"https://ws-homologacao-rtc.giss.com.br/service-ws/nf/nfse-ws?wsdl";
+                    else
+                        URL = @"https://ws-scs.giss.com.br/service-ws/nf/nfse-ws?wsdl";
+
+                    Serializer ser = new Serializer();
+
+                    System.ServiceModel.Channels.CustomBinding bnd = new System.ServiceModel.Channels.CustomBinding();
+                    System.ServiceModel.Channels.TextMessageEncodingBindingElement textBindingElement = new System.ServiceModel.Channels.TextMessageEncodingBindingElement();
+                    textBindingElement.MessageVersion = System.ServiceModel.Channels.MessageVersion.CreateVersion(System.ServiceModel.EnvelopeVersion.Soap11, System.ServiceModel.Channels.AddressingVersion.None);
+                    bnd.Elements.Add(textBindingElement);
+                    System.ServiceModel.Channels.HttpsTransportBindingElement httpsBindingElement = new System.ServiceModel.Channels.HttpsTransportBindingElement();
+                    httpsBindingElement.AllowCookies = true;
+                    httpsBindingElement.MaxBufferSize = int.MaxValue;
+                    httpsBindingElement.MaxReceivedMessageSize = int.MaxValue;
+                    httpsBindingElement.AuthenticationScheme = AuthenticationSchemes.Digest;
+                    httpsBindingElement.RequireClientCertificate = true;
+                    httpsBindingElement.TransferMode = System.ServiceModel.TransferMode.Buffered;
+                    bnd.Elements.Add(httpsBindingElement);
+
+                    if (Action == "RECEPCIONARLOTERPS")
+                    {
+                        X509Certificate2 _X509Cert = new X509Certificate2(Convert.FromBase64String(Cert), Pass, X509KeyStorageFlags.MachineKeySet);
+
+                        //assina o RPS caso não esteja assinado
+                        XMLString = SignNFSe_LoteRps.EnsureSigned(XMLString, _X509Cert);
+
+                        wsSaoCaetano.nfseClient ws_client = new wsSaoCaetano.nfseClient(bnd, new EndpointAddress(URL));
+                        ws_client.ClientCredentials.ClientCertificate.Certificate = _X509Cert;
+
+                        //soapLog = SoapEnvelopeLogger.AttachTo(ws_client, "saocaetano-recepcionarloterps");
+
+                        wsSaoCaetano.RecepcionarLoteRps ws_request = new wsSaoCaetano.RecepcionarLoteRps(Cab, XMLString);
+                        msgResultado = ws_client.RecepcionarLoteRps(ws_request.nfseCabecMsg, ws_request.nfseDadosMsg);
+                    }
+
+                    else
+                    if (Action == "CONSULTA")
+                    {
+
+                        wsSaoCaetano.nfseClient ws_client = new wsSaoCaetano.nfseClient(bnd, new EndpointAddress(URL));
+                        ws_client.ClientCredentials.ClientCertificate.Certificate = new X509Certificate2(Convert.FromBase64String(Cert), Pass, X509KeyStorageFlags.MachineKeySet);
+
+                    }
+                }
             }
             else
             {
@@ -526,6 +584,9 @@ public class SendNFSe
             msgResultado = "Erro: " + rootCause.Message;
             error = true;
         }
+
+        //if (debug && soapLog != null)
+        //    msgResultado = soapLog.Describe() + msgResultado;
 
         return !error
             ? (ActionResult)new OkObjectResult(msgResultado)

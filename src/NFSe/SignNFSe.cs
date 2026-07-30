@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
+using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -23,9 +24,22 @@ public class SignNFSe
     public static async Task<IActionResult> Run(
         [HttpTrigger(AuthorizationLevel.Function, "post", "get")] HttpRequest req)
     {
-        var bodyStream = new StreamReader(req.Body);
-        bodyStream.BaseStream.Seek(0, SeekOrigin.Begin);
-        string XMLString = bodyStream.ReadToEnd();
+
+        //var bodyStream = new StreamReader(req.Body);
+        //bodyStream.BaseStream.Seek(0, SeekOrigin.Begin);
+        //string XMLString = bodyStream.ReadToEnd();
+
+        string XMLString = "";
+        using (var bodyStream = new StreamReader(
+        req.Body,
+        Encoding.UTF8,
+        detectEncodingFromByteOrderMarks: false,
+        bufferSize: 1024,
+        leaveOpen: true))
+        {
+            XMLString = await bodyStream.ReadToEndAsync();
+        }
+
         string RefUri = req.Headers["RefUri"];
         string Cert = req.Headers["Cert"];
         string Pass = req.Headers["Pass"];

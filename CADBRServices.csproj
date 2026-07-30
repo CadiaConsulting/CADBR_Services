@@ -1,5 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
@@ -7,7 +7,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.23.0" />
@@ -21,9 +20,10 @@
     <PackageReference Include="System.ServiceModel.Http" Version="8.1.2" />
     <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Connected Services\NFSe\_wsdl\HSaoPaulo_TaxReform\" />
   </ItemGroup>
-
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="8.*" />
+  </ItemGroup>
 </Project>
