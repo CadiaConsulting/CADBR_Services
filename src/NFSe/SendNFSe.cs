@@ -530,8 +530,6 @@ public class SendNFSe
                     else
                         URL = @"https://ws-scs.giss.com.br/service-ws/nf/nfse-ws?wsdl";
 
-                    Serializer ser = new Serializer();
-
                     System.ServiceModel.Channels.CustomBinding bnd = new System.ServiceModel.Channels.CustomBinding();
                     System.ServiceModel.Channels.TextMessageEncodingBindingElement textBindingElement = new System.ServiceModel.Channels.TextMessageEncodingBindingElement();
                     textBindingElement.MessageVersion = System.ServiceModel.Channels.MessageVersion.CreateVersion(System.ServiceModel.EnvelopeVersion.Soap11, System.ServiceModel.Channels.AddressingVersion.None);
@@ -568,6 +566,8 @@ public class SendNFSe
                         wsSaoCaetano.nfseClient ws_client = new wsSaoCaetano.nfseClient(bnd, new EndpointAddress(URL));
                         ws_client.ClientCredentials.ClientCertificate.Certificate = new X509Certificate2(Convert.FromBase64String(Cert), Pass, X509KeyStorageFlags.MachineKeySet);
 
+                        wsSaoCaetano.ConsultarLoteRps ws_request = new wsSaoCaetano.ConsultarLoteRps(Cab, XMLString);
+                        msgResultado = ws_client.ConsultarLoteRps(ws_request.nfseCabecMsg, ws_request.nfseDadosMsg);
                     }
                 }
             }
